@@ -3,10 +3,10 @@ var del = require('del');
 var notify = require('gulp-notify');
 var express = require('express');
 //实例化express对象
-var app = express();
+//var app = express();
 //express指定静态文件目录
-app.use('/static', express.static('./public'));
-var nodemon = require('nodemon');
+//app.use('/static', express.static('./public'));
+var nodemon = require('gulp-nodemon');
 
 //压缩
 var htmlmin = require('gulp-htmlmin');
@@ -174,18 +174,18 @@ gulp.task('watch', function(){
 });
 
 gulp.task('dev:server', function () {
-  app.get('/', function (req, res) {
-    res.render('index', { title: 'Express' });
-  })
-  app.listen(3000)
   // 启动node
   nodemon({
     script: './app.js',
     ignore: ['.vscode', '.idea', 'node_modules'],
     env: {
       'NODE_ENV': 'development'
-    }
-  });
+    },
+    //tasks: ['sequence']
+  })
+//   .on('restart', function () {
+//         console.log('restarted!')
+//     })
 
   bs.init(null, {
     proxy: 'http://localhost:' + 5000,
