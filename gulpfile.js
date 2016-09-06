@@ -174,13 +174,13 @@ gulp.task('watch', function(){
 });
 
 gulp.task('dev:server', function () {
-//   app.get('/', function (req, res) {
-//     res.send('Hello World')
-//   })
-//   app.listen(3000)
+  app.get('/', function (req, res) {
+    res.render('index', { title: 'Express' });
+  })
+  app.listen(3000)
   // 启动node
   nodemon({
-    script: 'app.js',
+    script: './app.js',
     ignore: ['.vscode', '.idea', 'node_modules'],
     env: {
       'NODE_ENV': 'development'
@@ -199,6 +199,6 @@ gulp.task('dev:server', function () {
 
 gulp.task('default', function() {
   // 将你的默认的任务代码放在这
-  console.log('gulp');
+  console.log('Start-gulp');
 });
 gulp.task('sequence', sequence('default',['compile', 'webpack'], 'push', 'dev:server', 'watch'));
